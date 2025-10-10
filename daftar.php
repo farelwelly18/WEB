@@ -2,7 +2,16 @@
 require 'function.php';
 
 if(isset($_POST["daftar"])){
-    Daftar($_POST);
+    $hasil = Daftar($_POST);
+    if($hasil == 0){
+        echo "
+        <script>
+            document.location.href = 'daftar.php';
+        </script>
+        ";
+    }else{
+        echo "Bjir";
+    }
 }
 
 ?>

@@ -1,5 +1,7 @@
 <?php
-echo "TESTIS";
+    require 'function.php';
+
+    
 ?>
 
 <!DOCTYPE html>
