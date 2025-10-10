@@ -1,3 +1,7 @@
+<?php
+echo "TESTIS";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
