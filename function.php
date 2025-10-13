@@ -37,7 +37,7 @@ function Daftar($data){
         return 2;
     }
 
-    //check password sama atau tidak
+    //check password sama atau tidakk
 
     return 1;
 }
