@@ -15,6 +15,15 @@ function Login($data){
     $email = $data['email'];
     $pass = $data['pass'];
 
+    $search = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM akun where email = '$email'"));
+    if (!is_null($search)) {
+        //Verif Password
+        if (password_verify($pass, $search['password'])) {
+            return 0;
+        }
+        return 2;
+    }
+    return 3;
 
 }
 
@@ -29,15 +38,17 @@ function Daftar($data){
     $temp = mysqli_query($connect, "SELECT * FROM akun where email = '$email'");
     $temp = mysqli_fetch_assoc($temp);
     if (is_null($temp)) {
+        //check password sama atau tidakk
         if($pass == $passK){
             $pass = password_hash($pass, PASSWORD_DEFAULT);
             mysqli_query($connect, "INSERT INTO `akun` (`id`, `email`, `password`, `username`, `nickname`, `verif`, `admin`) VALUES (NULL, '$email', '$pass', NULL, NULL, '0', '0')");
             return 0;
+            // Return 0 artinya berhasil
         }
         return 2;
     }
 
-    //check password sama atau tidakk
+    
 
     return 1;
 }
