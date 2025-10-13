@@ -1,5 +1,5 @@
 <?php
-    require 'function.php';
+    require 'assets/function.php';
     if(isset($_POST['Login'])){
 
         $hasil = Login($_POST);

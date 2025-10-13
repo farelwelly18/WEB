@@ -1,5 +1,5 @@
 <?php
-require 'function.php';
+require 'assets/function.php';
 
 if(isset($_POST["daftar"])){
     $hasil = Daftar($_POST);
@@ -17,11 +17,16 @@ if(isset($_POST["daftar"])){
     }
 }
 
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- 
+cd ../../.../
+cd xampp\htdocs\webKesehatan
+     -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WELl WEB</title>
