@@ -23,15 +23,28 @@ function Daftar($data){
     $email = $data['emailD'];
     $pass = $data['passD'];
     $passK = $data['passK'];
-    //check password sama atau tidak
-    if($pass == $passK){
-        $pass = password_hash($pass, PASSWORD_DEFAULT);
-        mysqli_query($connect, "INSERT INTO `akun` (`id`, `email`, `password`, `username`, `nickname`, `verif`, `admin`) VALUES (NULL, '$email', '$pass', NULL, NULL, '0', '0')");
-        return 0;
+
+    //Check ada email sama atau tidak
+
+    $temp = mysqli_query($connect, "SELECT * FROM akun where email = '$email'");
+    $temp = mysqli_fetch_assoc($temp);
+    if (is_null($temp)) {
+        if($pass == $passK){
+            $pass = password_hash($pass, PASSWORD_DEFAULT);
+            mysqli_query($connect, "INSERT INTO `akun` (`id`, `email`, `password`, `username`, `nickname`, `verif`, `admin`) VALUES (NULL, '$email', '$pass', NULL, NULL, '0', '0')");
+            return 0;
+        }
+        return 2;
     }
+
+    //check password sama atau tidak
+
     return 1;
 }
 
-
-
+        // $biji = mysqli_query($connect, "SELECT * FROM akun where email = 'farisabdillah1806@gmail.com'");
+        // $biji = mysqli_fetch_assoc($biji);
+        // if (!is_null($biji)) {
+        //     var_dump($biji);
+        // }
 ?>

@@ -3,14 +3,17 @@ require 'function.php';
 
 if(isset($_POST["daftar"])){
     $hasil = Daftar($_POST);
-    if($hasil == 0){
+    if($hasil === 0){
         echo "
         <script>
             document.location.href = 'daftar.php';
         </script>
+        Nice
         ";
+    }else if($hasil === 1){
+        echo "Email sudah ada";
     }else{
-        echo "Bjir";
+        echo "Konfirmasi Password Salah";
     }
 }
 
