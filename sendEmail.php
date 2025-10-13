@@ -1,12 +1,17 @@
 <?php
 //Import PHPMailer classes into the global namespace
+require 'assets/vendor/autoload.php';
 //These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+require 'assets/vendor/PHPMailer/src/Exception.php';
+require 'assets/vendor/PHPMailer/src/PHPMailer.php';
+require 'assets/vendor/PHPMailer/src/SMTP.php';
+
 //Load Composer's autoloader (created by composer, not included with PHPMailer)
-require 'assets/vendor/autoload.php';
+
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
