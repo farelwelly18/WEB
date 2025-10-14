@@ -33,16 +33,30 @@
             <!-- Email -->
             <label for="pass" class=" ml-2">Email</label>
             <div class="w-full min-h-8 bg-slate-100 rounded-full shadow-sm shadow-slate-400 content-center">
-                <input type="email" id="email" name="email" placeholder="masukkan email" class="text-xs ml-3 my-auto focus:outline-none">
+                <input type="email" id="email" name="email" placeholder="masukkan email" class="text-xs ml-3 my-auto focus:outline-none w-56">
             </div>
         </div>
-        <div class="mb-5">
+        <div class="mb-4">
             <!-- Password -->
             <label for="pass" class=" ml-2">Password</label>
             <div class="w-full min-h-8 bg-slate-100 rounded-full shadow-sm shadow-slate-400 content-center">
-                <input type="password" id="pass" name="pass" placeholder="masukkan password" class="text-xs ml-3 my-auto focus:outline-none">
+                <input type="password" id="pass" name="pass" placeholder="masukkan password" class="text-xs ml-3 my-auto focus:outline-none w-56">
             </div>
         </div>
+        <?php if(isset($bug)): ?>
+            <?php if($bug>0):?>
+                <!-- Isi jika Email belum diverifikasi -->
+                <p class="text-xs text-red-700 text-center mb-3">
+                    Verifikasi E-Mail Terlebih Dahulu!
+                </p>
+            <?php else:?>
+                <!-- Isi jika Password/Email Salah -->
+                <p class="text-xs text-red-700 text-center mb-3">
+                    Email/Password Salah!
+                </p>
+            <?php endif;?>
+        <?php endif?>
+            
         <div class="flex w-full mb-2">
             <!-- Submit -->
             <button type="submit" name="Login" id="Login" class="m-auto text-sm bg-slate-600 text-white py-1 px-5 rounded-full ">
@@ -50,17 +64,11 @@
             </button>
         </div>
         <p class="text-stone-600 text-xs text-center">Belum punya akun? <a href="daftar.php" class="text-sky-500">Daftar!</a></p>
+
+
     </form>        
 
-    <?php if(isset($bug)): ?>
-        <?php if($bug>0):?>
-            <!-- Isi jika Email belum diverifikasi -->
-
-        <?php else:?>
-            <!-- Isi jika Password/Email Salah -->
-            
-        <?php endif;?>
-    <?php endif?>
+    
 
 </body>
 </html>

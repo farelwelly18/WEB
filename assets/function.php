@@ -32,6 +32,7 @@ function Login($data){
         //Verif Password
         if (password_verify($pass, $search['password'])) {
             if ($search['verif']===1) {
+
                 return 0;
             }
             return 1;
@@ -57,25 +58,12 @@ function Daftar($data){
         if($pass == $passK){
             $pass = password_hash($pass, PASSWORD_DEFAULT);
             mysqli_query($connect, "INSERT INTO `akun` (`id`, `email`, `password`, `username`, `nickname`, `verif`, `admin`) VALUES (NULL, '$email', '$pass', NULL, NULL, '0', '0')");
-            // $berhasilKirim = SendEmail($email);
-            // if ($berhasilKirim === 0) {
-            //     return 0;
-            // }else{
-            //     return 3;
-            // }
             Return 0;
         }
         return 2;
     }
     return 1;
 }
-
-        // $biji = mysqli_query($connect, "SELECT * FROM akun where email = 'farisabdillah1806@gmail.com'");
-        // $biji = mysqli_fetch_assoc($biji);
-        // if (!is_null($biji)) {
-        //     var_dump($biji);
-        // }
-
 
 
 
@@ -90,29 +78,64 @@ function SendEmail($email){
 
     try {
         //Server settings
-        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
         $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
         $mail->Username   = 'farisabdillah1806@gmail.com';                     //SMTP username
-        $mail->Password   = 'cadhauknmpsgwqoj';                               //SMTP password
+        $mail->Password   = 'cadhauknmpsgwqoj';                                //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
-        $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $mail->Port       = 587;                                    
 
         //Recipients
         $mail->setFrom('from@example.com', 'Welly Kesehatan');
         // $mail->addAddress('joe@example.net', 'Joe User');     
         $mail->addAddress("$email");               //Name is optional
-        $mail->addReplyTo('no-reply@gmail.com', 'Information');
+        $mail->addReplyTo('no-reply@gmail.com', 'Verify');
 
         //Content
         $mail->isHTML(true);
-        $isiEmail = "
-
-        ";                                  //Set email format to HTML
-        $mail->Subject = 'Verifikasi Email karena telah membuka link Bokep';
-        $mail->Body    = 'This is the HTML message body <b>in bold!</b><br> WELL WELL WELL';
-        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+        $isiEmail = '
+           <!DOCTYPE html>
+            <html>
+              <head>
+                <meta charset="UTF-8">
+                <title>Verifikasi Email</title>
+              </head>
+              <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; margin: 0;">
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td align="center">
+                      <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; border-radius: 8px; overflow: hidden;">
+                        <tr>
+                          <td style="background-color: #007BFF; padding: 20px 0;">
+                            <h2 style="margin: 0; color: white; text-align: center;">Emailmu telah terdaftarkan ke Website Welly Kesehatan</h2>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 30px; text-align: center;">
+                            <h4 style="margin-top: 0;">Verifikasi Email anda untuk melengkapi pendaftaran anda di web kami!</h4>
+                            <p style="margin-bottom: 30px;">Klik tombol di bawah untuk melakukan verifikasi:</p>
+                            <a href="https://contoh-verifikasi.com" 
+                               style="display: inline-block; background-color: #28a745; color: white; text-decoration: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; margin-right: 10px; width: 150px;">
+                               Verifikasi
+                            </a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="background-color: #f0f0f0; padding: 20px; text-align: center; font-size: 12px; color: #777;">
+                            © 2025 Welly Kesehatan. Semua Hak Dilindungi.
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </body>
+            </html>
+        ';                                  //Set email format to HTML
+        $mail->Subject = 'Verifikasi Email karena telah membuka Bokep';
+        $mail->Body    = "$isiEmail";
+        // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         $mail->send();
         return 0;

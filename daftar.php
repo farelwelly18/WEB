@@ -5,7 +5,7 @@ if(isset($_POST["daftar"])){
     $hasil = Daftar($_POST);
     if($hasil === 0){
         $emailKirim = SendEmail($_POST['emailD']);
-        if ($emailKirim ===0 ) {
+        if ($emailKirim === 0 ) {
             echo "
             <script>
             document.location.href = 'index.php';
