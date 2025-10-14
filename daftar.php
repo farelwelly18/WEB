@@ -4,12 +4,16 @@ require 'assets/function.php';
 if(isset($_POST["daftar"])){
     $hasil = Daftar($_POST);
     if($hasil === 0){
-        echo "
-        <script>
-            document.location.href = 'daftar.php';
-        </script>
-        Nice
-        ";
+        $emailKirim = SendEmail($_POST['emailD']);
+        if ($emailKirim ===0 ) {
+            echo "
+            <script>
+            document.location.href = 'index.php';
+            </script>
+            ";
+        }else{
+            echo "Gagal";
+        }
     }else if($hasil === 1){
         echo "Email sudah ada";
     }else{
@@ -38,19 +42,19 @@ cd xampp\htdocs\webKesehatan
         <div class="mb-3">
             <label for="pass" class=" ml-2">Email</label>
             <div class="w-full min-h-8 bg-slate-100 rounded-full shadow-sm shadow-slate-400 content-center">
-                <input type="email" id="emailD" name="emailD" placeholder="masukkan email aktif" class="text-xs ml-3 my-auto focus:outline-none" required>
+                <input type="email" id="emailD" name="emailD" placeholder="masukkan email aktif" class="text-xs ml-3 my-auto focus:outline-none w-56" required>
             </div>
         </div>
         <div class="mb-3">
             <label for="pass" class=" ml-2">Password</label>
             <div class="w-full min-h-8 bg-slate-100 rounded-full shadow-sm shadow-slate-400 content-center">
-                <input type="password" id="passD" name="passD" placeholder="masukkan password" class="text-xs ml-3 my-auto focus:outline-none" required>
+                <input type="password" id="passD" name="passD" placeholder="masukkan password" class="text-xs ml-3 my-auto focus:outline-none w-56" required>
             </div>
         </div>
         <div class="mb-3">
             <label for="pass" class=" ml-2">Konfirmasi Password</label>
             <div class="w-full min-h-8 bg-slate-100 rounded-full shadow-sm shadow-slate-400 content-center">
-                <input type="password" id="passK" name="passK" placeholder="konfirmasi password" class="text-xs ml-3 my-auto focus:outline-none" required>
+                <input type="password" id="passK" name="passK" placeholder="konfirmasi password" class="text-xs ml-3 my-auto focus:outline-none w-56" required>
             </div>
         </div>
         <div class="flex w-full mb-2">

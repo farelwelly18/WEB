@@ -4,11 +4,15 @@
 
         $hasil = Login($_POST);
         if ($hasil === 0 ) {
-            echo "Login BErhasil";
+            echo "
+            <script>
+            document.location.href = 'Dashboard/homepage.php';
+            </script>
+            ";
         }else if($hasil === 1){
-            echo "Emailmu belum diverifikasi wok";
+            $bug = 1 ;
         }else{
-            echo "Passwordmu/Emailmu Salah biji";
+            $bug = 0 ;
         }
     }
     
@@ -47,6 +51,16 @@
         </div>
         <p class="text-stone-600 text-xs text-center">Belum punya akun? <a href="daftar.php" class="text-sky-500">Daftar!</a></p>
     </form>        
+
+    <?php if(isset($bug)): ?>
+        <?php if($bug>0):?>
+            <!-- Isi jika Email belum diverifikasi -->
+
+        <?php else:?>
+            <!-- Isi jika Password/Email Salah -->
+            
+        <?php endif;?>
+    <?php endif?>
 
 </body>
 </html>
