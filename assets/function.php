@@ -41,7 +41,6 @@ function Login($data){
         return 2;
     }
     return 3;
-
 }
 
 function Daftar($data){
@@ -70,7 +69,14 @@ function SetNama($data){
     global $connect;
     $username =  mysqli_real_escape_string($connect, htmlspecialchars($data['username']));
     $nickname =  mysqli_real_escape_string($connect, htmlspecialchars($data['nick']));
-
+    $id = HeckelDefender2();
+    $query = "
+    UPDATE akun
+    SET username = '$username',
+        nickname = '$nickname'
+    WHERE id = $id;
+    ";
+    mysqli_query($connect, $query);
 }
 
 function HeckelDefend($kata){
@@ -80,6 +86,16 @@ function HeckelDefend($kata){
     setcookie("id2", $iv);
     $Enkripsi = openssl_encrypt($kata, $code, $kataKunci, 0, $iv);
     return $Enkripsi;
+}
+
+function HeckelDefender2(){
+    $id = $_COOKIE['id'];
+    $kode = 'AES-256-CBC'; // Must be the same method used for encryption
+    $katakunci = 'WellyKesehatan'; // Must be the same key used for encryption
+    $iv = $_COOKIE['id2'];
+
+    $idTable = openssl_decrypt($id, $kode, $katakunci, 0, $iv);
+    return $idTable;
 }
 
 function SendEmail($email){

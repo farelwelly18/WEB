@@ -1,9 +1,18 @@
 <?php
     require 'assets/function.php';
+   
     if(isset($_POST['Login'])){
-
+        $email = $_POST['email'];
+        $search = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM akun where email = '$email'"));
         $hasil = Login($_POST);
         if ($hasil === 0 ) {
+            if (is_null($search['nickname'])) {
+                echo "
+                <script>
+                document.location.href = 'awal.php';
+                </script>
+                ";
+            }
             echo "
             <script>
             document.location.href = 'Dashboard/homepage.php';
