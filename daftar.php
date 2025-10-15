@@ -64,7 +64,7 @@ cd xampp\htdocs\webKesehatan
             <?php endif;?>
         <?php endif?>
         <div class="flex w-full mb-2">
-            <button type="submit" name="daftar" id="daftar" class="m-auto text-sm bg-slate-600 text-white py-1 px-5 rounded-full ">
+            <button type="submit" name="daftar" id="daftar" class="m-auto text-sm bg-slate-600 text-white py-1 px-5 rounded-xl">
                 Daftar
             </button>
         </div>

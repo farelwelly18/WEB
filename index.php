@@ -42,14 +42,14 @@
             <!-- Email -->
             <label for="pass" class=" ml-2">Email</label>
             <div class="w-full min-h-8 bg-slate-100 rounded-full shadow-sm shadow-slate-400 content-center">
-                <input type="email" id="email" name="email" placeholder="masukkan email" class="text-xs ml-3 my-auto focus:outline-none w-56">
+                <input type="email" id="email" name="email" placeholder="masukkan email" class="text-xs ml-3 my-auto focus:outline-none w-56" required>
             </div>
         </div>
         <div class="mb-4">
             <!-- Password -->
             <label for="pass" class=" ml-2">Password</label>
             <div class="w-full min-h-8 bg-slate-100 rounded-full shadow-sm shadow-slate-400 content-center">
-                <input type="password" id="pass" name="pass" placeholder="masukkan password" class="text-xs ml-3 my-auto focus:outline-none w-56">
+                <input type="password" id="pass" name="pass" placeholder="masukkan password" class="text-xs ml-3 my-auto focus:outline-none w-56" required>
             </div>
         </div>
         <?php if(isset($bug)): ?>
@@ -68,13 +68,11 @@
             
         <div class="flex w-full mb-2">
             <!-- Submit -->
-            <button type="submit" name="Login" id="Login" class="m-auto text-sm bg-slate-600 text-white py-1 px-5 rounded-full ">
+            <button type="submit" name="Login" id="Login" class="m-auto text-sm bg-slate-600 text-white py-1 px-5 rounded-xl ">
                 Login
             </button>
         </div>
         <p class="text-stone-600 text-xs text-center">Belum punya akun? <a href="daftar.php" class="text-sky-500">Daftar!</a></p>
-
-
     </form>        
 
     

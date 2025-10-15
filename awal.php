@@ -3,7 +3,11 @@ require 'assets/function.php';
 
 if(isset($_POST["konfirmasi"])){
    SetNama($_POST);
-    
+    echo "
+    <script>
+        document.location.href = 'Dashboard/homepage.php';
+    </script>
+    ";
 }
 
 
