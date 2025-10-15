@@ -11,15 +11,8 @@ if(isset($_POST["daftar"])){
             document.location.href = 'index.php';
             </script>
             ";
-        }else{
-            echo "Gagal";
-        }
-    }else if($hasil === 1){
-        echo "Email sudah ada";
-    }else{
-        echo "Konfirmasi Password Salah";
-    }
-}
+        }else{ echo "Gagal"; } }else if($hasil === 1){ $bug = 0; }else{ $bug =
+        1; } }
 
 
 ?>
@@ -57,8 +50,20 @@ cd xampp\htdocs\webKesehatan
                 <input type="password" id="passK" name="passK" placeholder="konfirmasi password" class="text-xs ml-3 my-auto focus:outline-none w-56" required>
             </div>
         </div>
+        <?php if(isset($bug)): ?>
+            <?php if($bug>0):?>
+                <!-- Isi jika Email belum diverifikasi -->
+                <p class="text-xs text-red-700 text-center mb-3">
+                    Konfirmasi Password Salah!
+                </p>
+            <?php else:?>
+                <!-- Isi jika Password/Email Salah -->
+                <p class="text-xs text-red-700 text-center mb-3">
+                    Email Sudah Terdaftar!
+                </p>
+            <?php endif;?>
+        <?php endif?>
         <div class="flex w-full mb-2">
-            <!-- <input type="submit" name="submit" id="submit" class="text-sm text-center m-auto bg-sky-500 px-4 rounded-full py-1 text-white" placeholder="Login"> -->
             <button type="submit" name="daftar" id="daftar" class="m-auto text-sm bg-slate-600 text-white py-1 px-5 rounded-full ">
                 Daftar
             </button>

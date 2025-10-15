@@ -1,24 +1,9 @@
 <?php
 require 'assets/function.php';
 
-if(isset($_POST["daftar"])){
-    $hasil = Daftar($_POST);
-    if($hasil === 0){
-        $emailKirim = SendEmail($_POST['emailD']);
-        if ($emailKirim ===0 ) {
-            echo "
-            <script>
-            document.location.href = 'index.php';
-            </script>
-            ";
-        }else{
-            echo "Gagal";
-        }
-    }else if($hasil === 1){
-        echo "Email sudah ada";
-    }else{
-        echo "Konfirmasi Password Salah";
-    }
+if(isset($_POST["konfirmasi"])){
+   
+    
 }
 
 

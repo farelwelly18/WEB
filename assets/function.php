@@ -1,14 +1,14 @@
 <?php
-    require 'assets/vendor/autoload.php';
+require 'assets/vendor/autoload.php';
     //These must be at the top of your script, not inside a function
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\SMTP;
-    use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-    require 'assets/vendor/PHPMailer/src/Exception.php';
-    require 'assets/vendor/PHPMailer/src/PHPMailer.php';
-    require 'assets/vendor/PHPMailer/src/SMTP.php';
-
+require 'assets/vendor/PHPMailer/src/Exception.php';
+require 'assets/vendor/PHPMailer/src/PHPMailer.php';
+require 'assets/vendor/PHPMailer/src/SMTP.php';
+session_start();
 
 
 
@@ -24,15 +24,16 @@ $connect = new mysqli($host, $user, $pass, $db);
 
 function Login($data){
     global $connect;
-    $email = $data['email'];
-    $pass = $data['pass'];
+    $email = mysqli_real_escape_string($connect, htmlspecialchars($data['email'])) ;
+    $pass = mysqli_real_escape_string($connect, htmlspecialchars($data['pass'])) ;
 
     $search = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM akun where email = '$email'"));
     if (!is_null($search)) {
         //Verif Password
         if (password_verify($pass, $search['password'])) {
-            if ($search['verif']===1) {
-
+            if ($search['verif'] == 1) {
+                $id = $search['id'];
+                setcookie("id", HeckelDefend($id));
                 return 0;
             }
             return 1;
@@ -45,9 +46,9 @@ function Login($data){
 
 function Daftar($data){
     global $connect;
-    $email = $data['emailD'];
-    $pass = $data['passD'];
-    $passK = $data['passK'];
+    $email = mysqli_real_escape_string($connect, htmlspecialchars($data['emailD']));
+    $pass = mysqli_real_escape_string($connect, htmlspecialchars($data['passD']));
+    $passK = mysqli_real_escape_string($connect, htmlspecialchars($data['passK']));
 
     //Check ada email sama atau tidak
 
@@ -65,8 +66,21 @@ function Daftar($data){
     return 1;
 }
 
+function SetNama($data){
+    global $connect;
+    $username =  mysqli_real_escape_string($connect, htmlspecialchars($data['username']));
+    $nickname =  mysqli_real_escape_string($connect, htmlspecialchars($data['nick']));
 
+}
 
+function HeckelDefend($kata){
+    $code = 'AES-256-CBC';
+    $kataKunci = 'WellyKesehatan'; 
+    $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($code));
+    setcookie("id2", $iv);
+    $Enkripsi = openssl_encrypt($kata, $code, $kataKunci, 0, $iv);
+    return $Enkripsi;
+}
 
 function SendEmail($email){
 
