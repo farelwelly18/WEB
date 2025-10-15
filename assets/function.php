@@ -108,7 +108,7 @@ function SendEmail($email){
 
         //Content
         $mail->isHTML(true);
-        $isiEmail = '
+        $isiEmail = <<<EmailTemplate
            <!DOCTYPE html>
             <html>
               <head>
@@ -129,7 +129,7 @@ function SendEmail($email){
                           <td style="padding: 30px; text-align: center;">
                             <h4 style="margin-top: 0;">Verifikasi Email anda untuk melengkapi pendaftaran anda di web kami!</h4>
                             <p style="margin-bottom: 30px;">Klik tombol di bawah untuk melakukan verifikasi:</p>
-                            <a href="https://contoh-verifikasi.com" 
+                            <a href="https://192.168.0.51/webKesehatan/verif.php?id=$email" 
                                style="display: inline-block; background-color: #28a745; color: white; text-decoration: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; margin-right: 10px; width: 150px;">
                                Verifikasi
                             </a>
@@ -146,7 +146,7 @@ function SendEmail($email){
                 </table>
               </body>
             </html>
-        ';                                  //Set email format to HTML
+        EmailTemplate;                                  //Set email format to HTML
         $mail->Subject = 'Verifikasi Email karena telah membuka Bokep';
         $mail->Body    = "$isiEmail";
         // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
