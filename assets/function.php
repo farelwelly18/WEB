@@ -65,18 +65,35 @@ function Daftar($data){
     return 1;
 }
 
-function SetNama($data){
+function SetProfil($data){
     global $connect;
     $username =  mysqli_real_escape_string($connect, htmlspecialchars($data['username']));
     $nickname =  mysqli_real_escape_string($connect, htmlspecialchars($data['nick']));
+    $tinggi =  mysqli_real_escape_string($connect, htmlspecialchars($data['tinggi']));
+    $berat =  mysqli_real_escape_string($connect, htmlspecialchars($data['berat']));
+    $date =  mysqli_real_escape_string($connect, htmlspecialchars($data['date']));
+    $umur = explode(" ", $date);
+    $umur = 2025 - $umur[2];
     $id = HeckelDefender2();
     $query = "
     UPDATE akun
     SET username = '$username',
-        nickname = '$nickname'
+        nickname = '$nickname',
+        tinggi   = '$tinggi',
+        berat    = '$berat',
+        tanggalLahir = '$date',
+        umur     = '$umur'
     WHERE id = $id;
     ";
     mysqli_query($connect, $query);
+}
+
+function GantiFormat($ymd){
+    $old    = explode("-", $ymd);
+    $bulan  = ["Januari", "Februari", "Maret", "April", "Meil", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+    $bulanN = $bulan[$old[1]-1];
+    $new    = $old[2]." ".$bulanN." ".$old[0];
+    return $new;
 }
 
 function HeckelDefend($kata){

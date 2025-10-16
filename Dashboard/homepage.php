@@ -9,7 +9,7 @@ if (!isset($_COOKIE['id'])) {
         ";
     }
 
-echo $id; 
+    // var_dump(Show("akun", $id));
 
 
  ?>

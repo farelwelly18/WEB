@@ -1,3 +1,18 @@
+<?php
+require '../assets/function2.php';
+$id = HeckelDefender();
+if (!isset($_COOKIE['id'])) {
+        echo "
+            <script>
+            document.location.href = '../index.php';
+            </script>
+        ";
+    }
+    
+$info = Show("akun", $id)[0];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,31 +32,35 @@
             <div class="container text-sm px-3 text-stone-950">
             <h4 class="mb-1 text-base text-stone-700">Username</h4>
                 <div class="bg-slate-200 p-3 rounded-md mb-3">
-                    <p class="">Muhammad Fahrian Faris Abdillah</p>
+                    <p class=""><?= $info["username"]; ?></p>
                 </div>
             <h4 class="mb-1 text-base text-stone-700">Nickname</h4>
                 <div class="bg-slate-200 p-3 rounded-md mb-3">
-                    <p class="">Farizz</p>
+                    <p class=""><?= $info["nickname"]; ?></p>
+                </div>
+            <h4 class="mb-1 text-base text-stone-700">E-Mail</h4>
+                <div class="bg-slate-200 p-3 rounded-md mb-3">
+                    <p class=""><?= $info["email"]; ?></p>
                 </div>
             <h4 class="mb-1 text-base text-stone-700">Tanggal Lahir</h4>
                 <div class="bg-slate-200 p-3 rounded-md mb-3">
-                    <p class="">18 Juni 2025</p>
+                    <p class=""><?= $info["tanggalLahir"]; ?></p>
                 </div>
             <h4 class="mb-1 text-base text-stone-700">Umur</h4>
                 <div class="bg-slate-200 p-3 rounded-md mb-3">
-                    <p class="">16</p>
+                    <p class=""><?= $info["umur"]; ?></p>
                 </div>
             <h4 class="mb-1 text-base text-stone-700">Tinggi Badan</h4>
                 <div class="bg-slate-200 p-3 rounded-md mb-3">
-                    <p class="">156 cm</p>
+                    <p class=""><?= $info["tinggi"]; ?> cm</p>
                 </div>
             <h4 class="mb-1 text-base text-stone-700">Berat Badan</h4>
                 <div class="bg-slate-200 p-3 rounded-md mb-3">
-                    <p class="">48.6 KG</p>
+                    <p class=""><?= $info["berat"]; ?> kg</p>
                 </div>
             <h4 class="mb-1 text-base text-stone-700">Golongan Darah</h4>
                 <div class="bg-slate-200 p-3 rounded-md mb-3">
-                    <p class="">Unidentified</p>
+                    <p class=""><?= $info["golonganDarah"]; ?></p>
                 </div>
                 <div class="container w-full content-between justify-between flex gap-7 mb-4">
                     <button class="m-auto flex-1 bg-blue-600 text-white p-1 px-2 rounded-md">
