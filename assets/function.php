@@ -81,7 +81,7 @@ function SetProfil($data){
         nickname = '$nickname',
         tinggi   = '$tinggi',
         berat    = '$berat',
-        tanggalLahir = '$date',
+        date     = '$date',
         umur     = '$umur'
     WHERE id = $id;
     ";
