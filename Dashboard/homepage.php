@@ -10,7 +10,20 @@ if (!isset($_COOKIE['id'])) {
     }
 
     $akun = Show("akun", $id)[0];
-
+// Waktu
+date_default_timezone_set('Asia/Jakarta');
+$time = date("H");
+if($time>18){
+    $time = 'Malam';
+}elseif($time>15){
+    $time = 'Sore';
+}elseif($time>12){
+    $time = 'Siang';
+}elseif($time>6){
+    $time = 'Pagi';
+}else{
+    $time = 'Dini';
+}
 
 ?>
 
@@ -26,10 +39,13 @@ if (!isset($_COOKIE['id'])) {
 </head>
 <body class="bg-stone-100">
     <div class="container bg-indigo-600 flex-col">
-        <div class="container  w-full h-auto m-auto flex px-3 py-12 content-center">
-            <h1 class="text-stone-100 text-2xl text-left m-auto">Selamat Pagi <?= $akun['nickname']?>!</h1>
+        <div class="container w-full h-auto m-auto flex px-3 py-12 content-center">
+            <div class="text-left m-auto">
+                <h1 class="text-stone-100 text-2xl text-left m-auto">Selamat <?= $time?> <?= $akun['nickname']?>!</h1>
+                <div id="clock" class="text-stone-100 text-center"></div>
+            </div>
         </div>
-        <div class="container w-full m-auto rounded-t-lg bg-stone-100 py-6 px-4 border-t-1 ">
+        <div class="container w-full m-auto rounded-t-xl bg-stone-100 py-6 px-4">
             <div class="mb-5">
                 <h2 class="mb-2">Jadwal Hari Ini </h2>
                     <div class="Jadwal bg-stone-200 w-full h-32 mb-2 flex rounded-md">
@@ -39,11 +55,29 @@ if (!isset($_COOKIE['id'])) {
             <div class="mb-5">
                 <h2 class="mb-2">Tips Kesehatan</h2>
                 <div class="Jadwal bg-stone-200 w-full min-h-12 mb-2 flex-col rounded-md p-2">
-                    <p class="my-auto text-sm text-stone-600">"Olahragalah walau hanya punya waktu luang 5 menit"</p>
+                    <p class="my-auto text-sm text-stone-600">Olahragalah walau hanya punya waktu luang 5 menit</p>
                 </div>
             </div>
-            <div class="mb-5">
+            <div class="mb-10">
                 <h2 class="mb-2">Artikel Terbaru</h2>
+                <a href="#" class="hover:bg-stone-200 focus:bg-stone-400">
+                    <div class=" w-full max-h-64 mb-2 overflow-hidden hover:bg-stone-200 focus:bg-stone-400">
+                        <img src="../assets/image/article/alam.jpg" alt="" class="w-full max-h-45  object-cover">
+                        <div class="w-full pt-2 px-2 hover:bg-stone-200 focus:bg-stone-400">
+                            <h2>Menikmati Alam Dapat Menghilangkan Resiko Bunuh Diri</h2>
+                        </div>
+                    </div>
+                    <hr class="text-stone-300">
+                </a>
+                <a href="#" class="hover:bg-stone-200 focus:bg-stone-400">
+                    <div class=" w-full max-h-64 mb-2 overflow-hidden hover:bg-stone-200 focus:bg-stone-400">
+                        <img src="../assets/image/article/doctorHouse.avif" alt="" class="w-full max-h-45  object-cover">
+                        <div class="w-full pt-2 px-2 hover:bg-stone-200 focus:bg-stone-400">
+                            <h2>Dokter Gila Dari Entah Berantah Minum Pipis Pasiennya!</h2>
+                        </div>
+                    </div>
+                    <hr class="text-stone-300">
+                </a>
                 
             </div>
         </div>
@@ -51,7 +85,9 @@ if (!isset($_COOKIE['id'])) {
     <div class="">
         
     </div>
-    <div class="nav container fixed bottom-0 w-full bg-stone-200 left-1/2 -translate-x-1/2 flex text-sm content-center justify-around gap-2 py-2 px-1 rounded-t-md border-stone-400 border-t-2">
+
+    <!-- Bagian bawaha adalah navigasi -->
+    <div class="nav container fixed bottom-0 w-full bg-stone-200 left-1/2 -translate-x-1/2 flex text-sm content-center justify-around gap-2 py-2 px-1 rounded-t-md shadow-sm shadow-stone-400">
         <div class="m-auto text-center flex-1 rounded-full scale-90 text-indigo-700">
             <i class="fa fa-home fa-2x" aria-hidden="true"></i>
             <!-- <h4>Dashboard </h4> -->
@@ -65,11 +101,24 @@ if (!isset($_COOKIE['id'])) {
             <!-- <h4>Article</h4> -->
         </div>
         <div class="m-auto text-center flex-1  rounded-full scale-75">
-            <a href="akun.php">
+            <a href="profile.php">
                 <i class="fa fa-user fa-2x" aria-hidden="true"></i>
             </a>
             <!-- <h4>Profil</h4> -->
         </div>
     </div>
+    <script>
+        function updateClock() {
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+
+        const timeString = `${hours}:${minutes}:${seconds}`;
+        document.getElementById('clock').textContent = timeString;
+    }
+        updateClock(); // Display initial time
+        setInterval(updateClock, 1000); // Update every second
+    </script>
 </body>
 </html>

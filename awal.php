@@ -19,7 +19,7 @@ if(isset($_POST["konfirmasi"])){
     <!-- 
 cd ../../.../
 cd xampp\htdocs\webKesehatan
-     -->
+    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WELl WEB</title>
@@ -30,8 +30,8 @@ cd xampp\htdocs\webKesehatan
         <h1 class="text-center text-2xl font-semibold mb-5">Atur Profil</h1>
         <hr class="text-stone-500 mb-12">
         <div class="mb-12">
-           <div class="mb-3">
-               <label for="pass" class=" ml-2">Username</label>
+        <div class="mb-3">
+            <label for="pass" class=" ml-2">Username</label>
                 <div class="w-full min-h-8 bg-slate-100 rounded-full shadow-sm shadow-slate-400 content-center">
                     <input type="text" id="username" name="username" placeholder="masukkan nama panjangmu" class="text-xs ml-3 my-auto focus:outline-none w-56" required>
                 </div>

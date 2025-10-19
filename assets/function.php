@@ -33,7 +33,7 @@ function Login($data){
         if (password_verify($pass, $search['password'])) {
             if ($search['verif'] == 1) {
                 $id = $search['id'];
-                setcookie("id", HeckelDefend($id));
+                setcookie("id", HeckelDefend($id), time() + (60 * 60 * 24 * 30),'/');
                 return 0;
             }
             return 1;
@@ -100,7 +100,7 @@ function HeckelDefend($kata){
     $code = 'AES-256-CBC';
     $kataKunci = 'WellyKesehatan'; 
     $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($code));
-    setcookie("id2", $iv);
+    setcookie("id2", $iv, time() + (60 * 60 * 24 * 30),'/');
     $Enkripsi = openssl_encrypt($kata, $code, $kataKunci, 0, $iv);
     return $Enkripsi;
 }
