@@ -13,13 +13,13 @@ if (!isset($_COOKIE['id'])) {
 // Waktu
 date_default_timezone_set('Asia/Jakarta');
 $time = date("H");
-if($time>18){
+if($time>17){
     $time = 'Malam';
-}elseif($time>15){
+}elseif($time>14){
     $time = 'Sore';
-}elseif($time>12){
+}elseif($time>11){
     $time = 'Siang';
-}elseif($time>6){
+}elseif($time>5){
     $time = 'Pagi';
 }else{
     $time = 'Dini';
@@ -97,10 +97,12 @@ if($time>18){
             <!-- <h4>Schedule</h4> -->
         </div>
         <div class="m-auto text-center flex-1  rounded-full scale-75">
-            <i class="fa fa-file-text fa-2x" aria-hidden="true"></i>
+            <a href="article.php">
+                <i class="fa fa-file-text fa-2x" aria-hidden="true"></i>
+            </a>
             <!-- <h4>Article</h4> -->
         </div>
-        <div class="m-auto text-center flex-1  rounded-full scale-75">
+        <div class="m-auto text-center flex-1  rounded-full scale-90">
             <a href="profile.php">
                 <i class="fa fa-user fa-2x" aria-hidden="true"></i>
             </a>

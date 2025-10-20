@@ -116,7 +116,7 @@ if (isset($_POST['hapus'])){
 
     <!-- Bagian navigasi -->
     <div class="nav container fixed bottom-0 w-full bg-white left-1/2 -translate-x-1/2 flex text-sm content-center justify-around gap-2 py-2 px-1 rounded-t-md">
-        <div class="m-auto text-center flex-1 rounded-full scale-75">
+        <div class="m-auto text-center flex-1 rounded-full scale-90">
             <a href="homepage.php">
                 <i class="fa fa-home fa-2x" aria-hidden="true"></i>
             </a>
@@ -127,7 +127,9 @@ if (isset($_POST['hapus'])){
             <!-- <h4>Schedule</h4> -->
         </div>
         <div class="m-auto text-center flex-1  rounded-full scale-75">
-            <i class="fa fa-file-text fa-2x" aria-hidden="true"></i>
+            <a href="article.php">
+                <i class="fa fa-file-text fa-2x" aria-hidden="true"></i>
+            </a>
             <!-- <h4>Article</h4> -->
         </div>
         <div class="m-auto text-center flex-1  rounded-full scale-90 text-indigo-700">
