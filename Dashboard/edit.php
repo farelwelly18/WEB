@@ -62,7 +62,12 @@ if (isset($_POST['ganti'])){
     </div>
 
     <div class="container m-auto bg-inherit rounded-lg max-w-96 h-auto p-3">
-        <h1 class="text-2xl text-center font-bold mb-12 ">Edit Profil</h1>
+        <div>
+            <a href="profile.php">
+                <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+            </a>
+            <h1 class="text-2xl text-center font-bold mb-12 ">Edit Profil</h1>
+        </div>
         <div class="container bg-stone-200 w-full m-auto rounded-md px-2">
             <form action="" method="post">
                 <div class="container text-sm px-3 text-stone-950">
@@ -124,7 +129,9 @@ if (isset($_POST['ganti'])){
             <!-- <h4>Article</h4> -->
         </div>
         <div class="m-auto text-center flex-1  rounded-full scale-90 text-indigo-700">
+            <a href="profile.php">
                 <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+            </a>
             <!-- <h4>Profil</h4> -->
         </div>
 </body>

@@ -39,6 +39,9 @@ if($time>17){
 </head>
 <body class="bg-stone-100">
     <div class="container bg-indigo-600 flex-col">
+        <div class="absolute right-0 p-1 w-auto">
+            <div class="flex p-1 text-white bg-red-600 rounded-sm text-xs"><a  href="../keluar.php" class="flex gap-1">Log Out<i class="fa fa-sign-out m-auto" aria-hidden="true"></i></a></div>
+        </div>
         <div class="container w-full h-auto m-auto flex px-3 py-12 content-center">
             <div class="text-left m-auto">
                 <h1 class="text-stone-100 text-2xl text-left m-auto">Selamat <?= $time?> <?= $akun['nickname']?>!</h1>
