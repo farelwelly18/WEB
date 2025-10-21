@@ -101,10 +101,10 @@ if (isset($_POST['hapus'])){
                     <?php endif ?>
                 </div>
                 <div class="container w-full content-between justify-between flex gap-7 mb-12">
-                    <button class="m-auto flex-1 bg-blue-600 text-white p-1 px-2 rounded-md">
+                    <button class="m-auto flex-1 bg-blue-600 text-white p-1 px-2 rounded-md" onclick="Edit()" >
                         <i class="fa fa-cog" aria-hidden="true"></i>
-                        Edit Profil
-                    </button>
+                            Edit Profil
+                        </button>
                     <button class="m-auto flex-1 bg-red-600 text-white p-1 px-2 rounded-md " onclick="hapusTombol()">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                         Hapus Akun
@@ -149,6 +149,9 @@ if (isset($_POST['hapus'])){
             bg.style.display = "none";
             danger.style.display = "none";
             body.style.overflow = "scroll";
+        }
+        function Edit(){
+            document.location.href = "edit.php";
         }
     </script>
 </body>
