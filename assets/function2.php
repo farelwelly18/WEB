@@ -43,30 +43,44 @@ function GantiFormat($ymd){
     $new    = $old[2]." ".$bulanN." ".$old[0];
     return $new;
 }
-
+//0 berhasil 1 format salah 2 terlalu besar 3 tidak diketahui
 function GantiPP($data){
+	global $connect;
 	$fileName = $data['name']; // Nama asli file
-	$type = explode(".", $fileName);
-	$tipe = count($type);
-	$type = $type[$tipe-1];
 	$tmpName  = $data['tmp_name'];
 	$fileSize = $data['size'];
 	$fileType = $data['type'];
 	$error    = $data['error'];
-	$location = "../assets/image/profile/";
-    $id = HeckelDefender();
-	// $location = $location.$id."/";
-	$target = $location.basename($id.".".$type);
-	if(!is_dir($location)){
-		mkdir($location,0777,true);
-	}
-	if(move_uploaded_file($tmpName, $target)){
-		echo "Berhasil";
+	//Cek ekstensi file
+	$type = explode(".", $fileName);
+	$tipe = count($type);
+	$type = $type[$tipe-1];
+	//Cek apakah format sesuai
+	if($type == "png" || $type == "jpg" || $type == "jpeg" || $type == "jfif"){
+		//Cek ukuran file, maksimal
+		if($fileSize > 1500000){
+			return 2;
+		}
+		$location = "../assets/image/profile/";
+		$id = HeckelDefender();
+		$target = $location.basename($id.".".$type);
+		$fileName = basename($id.".".$type);
+		if(!is_dir($location)){
+			mkdir($location,0777,true);
+		}
+		if(move_uploaded_file($tmpName, $target)){
+			mysqli_query($connect, "
+			UPDATE akun
+			SET gambar = '$fileName'
+			where id = $id;
+			");
+			return 0;
+		}else{
+			return 3;
+		}
 	}else{
-		echo "Gagal";
+		return 1;
 	}
-
-
 }
 
 function SetProfil($data){
@@ -78,7 +92,6 @@ function SetProfil($data){
     $tinggi =  mysqli_real_escape_string($connect, htmlspecialchars($data['tinggi']));
     $berat =  mysqli_real_escape_string($connect, htmlspecialchars($data['berat']));
     $date =  mysqli_real_escape_string($connect, htmlspecialchars($data['date']));
-	$gambar = mysqli_real_escape_string($connect, htmlspecialchars($data['gambar']));
 	if(!empty($date)){
 		$umur = explode(" ", $date);
 		$umur = 2025 - $umur[2];
@@ -93,8 +106,7 @@ function SetProfil($data){
         tinggi   = '$tinggi',
         berat    = '$berat',
         date     = '$date',
-        umur     = '$umur',
-		gambar   = '$gambar'
+        umur     = '$umur'
     WHERE id = $id;
     ";
     mysqli_query($connect, $query);

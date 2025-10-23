@@ -12,19 +12,20 @@ if (!isset($_COOKIE['id']) || !isset($_COOKIE['id2'])) {
 
     }
 if (isset($_POST['ganti'])){
-    // if(empty($_POST['date'])){
-    //     $_POST['date'] = null;
-    // }else{
-    //     $_POST['date'] = GantiFormat($_POST['date']);
-    // }
-    // SetProfil($_POST);
+    if(empty($_POST['date'])){
+        $_POST['date'] = null;
+    }else{
+        $_POST['date'] = GantiFormat($_POST['date']);
+    }
+    SetProfil($_POST);
+    GantiPP($_FILES['gambar']);
     // echo "
     //         <script>
     //         document.location.href = 'profile.php';
     //         </script>
     //     ";
 
-    echo GantiPP($_FILES['gambar']);
+    // echo $_FILES['gambar']['type'];
 
 }
 

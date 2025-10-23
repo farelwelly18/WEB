@@ -142,7 +142,7 @@ function SendEmail($email){
         //Content
         $mail->isHTML(true);
         $isiEmail = <<<EmailTemplate
-           <!DOCTYPE html>
+          <!DOCTYPE html>
             <html>
               <head>
                 <meta charset="UTF-8">

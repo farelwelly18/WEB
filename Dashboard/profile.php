@@ -59,7 +59,11 @@ if (isset($_POST['hapus'])){
 
     <div class="container m-auto bg-inherit rounded-lg max-w-96 h-auto p-3">
         <h1 class="text-2xl text-center font-bold mb-6 ">Profil Pribadi</h1>
-        <img src="../assets/image/default.png" alt="" class="rounded-full w-24 m-auto mb-1">
+        <?php if(is_null($info['gambar'])): ?>
+            <img src="../assets/image/default.png" alt="Gambar pp" class="rounded-full w-24 m-auto mb-1">
+        <?php else:?>
+            <img src="../assets/image/profile/<?= $info['gambar'];?>" alt="Gambar pp" class="rounded-full object-cover w-24 h-24 m-auto mb-1">
+        <?php endif;?>
         <h1 class="text-xl text-center font-semibold mb-3">Farizz</h1>
         <hr class="text-stone-500 mb-3">
         <div class="container bg-stone-200 w-full m-auto rounded-md px-2">
