@@ -44,6 +44,31 @@ function GantiFormat($ymd){
     return $new;
 }
 
+function GantiPP($data){
+	$fileName = $data['name']; // Nama asli file
+	$type = explode(".", $fileName);
+	$tipe = count($type);
+	$type = $type[$tipe-1];
+	$tmpName  = $data['tmp_name'];
+	$fileSize = $data['size'];
+	$fileType = $data['type'];
+	$error    = $data['error'];
+	$location = "../assets/image/profile/";
+    $id = HeckelDefender();
+	// $location = $location.$id."/";
+	$target = $location.basename($id.".".$type);
+	if(!is_dir($location)){
+		mkdir($location,0777,true);
+	}
+	if(move_uploaded_file($tmpName, $target)){
+		echo "Berhasil";
+	}else{
+		echo "Gagal";
+	}
+
+
+}
+
 function SetProfil($data){
     global $connect;
     $id = HeckelDefender();

@@ -12,17 +12,20 @@ if (!isset($_COOKIE['id']) || !isset($_COOKIE['id2'])) {
 
     }
 if (isset($_POST['ganti'])){
-    if(empty($_POST['date'])){
-        $_POST['date'] = null;
-    }else{
-        $_POST['date'] = GantiFormat($_POST['date']);
-    }
-    SetProfil($_POST);
-    echo "
-            <script>
-            document.location.href = 'profile.php';
-            </script>
-        ";
+    // if(empty($_POST['date'])){
+    //     $_POST['date'] = null;
+    // }else{
+    //     $_POST['date'] = GantiFormat($_POST['date']);
+    // }
+    // SetProfil($_POST);
+    // echo "
+    //         <script>
+    //         document.location.href = 'profile.php';
+    //         </script>
+    //     ";
+
+    echo GantiPP($_FILES['gambar']);
+
 }
 
 
@@ -69,7 +72,7 @@ if (isset($_POST['ganti'])){
             <h1 class="text-2xl text-center font-bold mb-12 ">Edit Profil</h1>
         </div>
         <div class="container bg-stone-200 w-full m-auto rounded-md px-2">
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
                 <div class="container text-sm px-3 text-stone-950">
                     <h4 class="mb-1 text-base text-stone-700">Username</h4>
                         <div class="bg-stone-50 p-3 rounded-md mb-3">
