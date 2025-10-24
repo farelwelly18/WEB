@@ -1,6 +1,6 @@
 <?php
     require 'assets/function.php';
-   
+
     if(isset($_POST['Login'])){
         $email = $_POST['email'];
         $search = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM akun where email = '$email'"));
@@ -60,9 +60,14 @@
                 </p>
             <?php else:?>
                 <!-- Isi jika Password/Email Salah -->
-                <p class="text-xs text-red-700 text-center mb-3">
-                    Email/Password Salah!
-                </p>
+                <div class="flex w-full mb-3">
+                    <p class="text-xs text-red-700 text-center mr-auto">
+                        Email/Password Salah!
+                    </p>
+                    <a href="reset.php?email=<?=$_POST['email']?>" class="text-xs text-blue-600 text-center ml-auto">
+                        Lupa Password?
+                    </a>
+                </div>
             <?php endif;?>
         <?php endif?>
             

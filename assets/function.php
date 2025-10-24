@@ -105,6 +105,15 @@ function HeckelDefend($kata){
     return $Enkripsi;
 }
 
+function ReverseHackerDefend($kata){
+    $kode = 'AES-256-CBC'; // Must be the same method used for encryption
+    $katakunci = 'WellyKesehatan'; // Must be the same key used for encryption
+    $iv = $_COOKIE['id2'];
+
+    $kata = openssl_decrypt($kata, $kode, $katakunci, 0, $iv);
+    return $kata;
+}
+
 function HeckelDefender2(){
     $id = $_COOKIE['id'];
     $kode = 'AES-256-CBC'; // Must be the same method used for encryption
@@ -114,6 +123,8 @@ function HeckelDefender2(){
     $idTable = openssl_decrypt($id, $kode, $katakunci, 0, $iv);
     return $idTable;
 }
+
+//Untuk alasan tidak jelas, tidak bisa mengirim email!
 
 function SendEmail($email){
 
@@ -163,8 +174,8 @@ function SendEmail($email){
                             <h4 style="margin-top: 0;">Verifikasi Email anda untuk melengkapi pendaftaran anda di web kami!</h4>
                             <p style="margin-bottom: 30px;">Klik tombol di bawah untuk melakukan verifikasi:</p>
                             <a href="https://192.168.1.3/WEB/verif.php?id=$email" 
-                               style="display: inline-block; background-color: #28a745; color: white; text-decoration: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; margin-right: 10px; width: 150px;">
-                               Verifikasi
+                              style="display: inline-block; background-color: #28a745; color: white; text-decoration: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; margin-right: 10px; width: 150px;">
+                              Verifikasi
                             </a>
                           </td>
                         </tr>
@@ -181,6 +192,83 @@ function SendEmail($email){
             </html>
         EmailTemplate;                                  //Set email format to HTML
         $mail->Subject = 'Verifikasi Email';
+        $mail->Body    = "$isiEmail";
+        // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+        $mail->send();
+        return 0;
+    } catch (Exception $e) {
+        return 1;
+    }
+}
+
+function SendReset($email, $id){
+
+    //Load Composer's autoloader (created by composer, not included with PHPMailer)
+
+
+    //Create an instance; passing `true` enables exceptions
+    $mail = new PHPMailer(true);
+
+    try {
+        //Server settings
+        // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'farelwelly18@gmail.com';                     //SMTP username
+        $mail->Password   = 'qhrqohdyuqsjmabm';                                //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
+        $mail->Port       = 587;                                    
+
+        //Recipients
+        $mail->setFrom('from@example.com', 'Welly Kesehatan');
+        // $mail->addAddress('joe@example.net', 'Joe User');     
+        $mail->addAddress("$email");               //Name is optional
+        $mail->addReplyTo('no-reply@gmail.com', 'Verify');
+
+        //Content
+        $mail->isHTML(true);
+        $isiEmail = <<<EmailTemplate
+          <!DOCTYPE html>
+            <html>
+              <head>
+                <meta charset="UTF-8">
+                <title>Verifikasi Email</title>
+              </head>
+              <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; margin: 0;">
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td align="center">
+                      <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; border-radius: 8px; overflow: hidden;">
+                        <tr>
+                          <td style="background-color: #007BFF; padding: 20px 0;">
+                            <h2 style="margin: 0; color: white; text-align: center;">Permintaan Reset Password</h2>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 30px; text-align: center;">
+                            <h4 style="margin-top: 0;">Abaikan Jika Bukan Kamu Yang Minta!</h4>
+                            <p style="margin-bottom: 30px;">Klik Tombol Dibawah Untuk Mereset Password:</p>
+                            <a href="https://192.168.1.3/WEB/reset.php?secure=$id" 
+                              style="display: inline-block; background-color: #28a745; color: white; text-decoration: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; margin-right: 10px; width: 150px;">
+                              Atur Sandi Baru
+                            </a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="background-color: #f0f0f0; padding: 20px; text-align: center; font-size: 12px; color: #777;">
+                            © 2025 Welly Kesehatan. Semua Hak Dilindungi.
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </body>
+            </html>
+        EmailTemplate;                                  //Set email format to HTML
+        $mail->Subject = 'Reset Password';
         $mail->Body    = "$isiEmail";
         // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
