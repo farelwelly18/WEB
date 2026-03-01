@@ -10,3 +10,5 @@ git add .
 git commit -m "Catatan"
 
 git push origin main
+
+hehe, biar ga mati streaknya
